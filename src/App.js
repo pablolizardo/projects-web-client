@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import Grid from './component/Grid'
+import Project from './component/Project'
 
 function App() {
   const [projects, setProjects] = useState()
@@ -10,32 +12,20 @@ function App() {
       setProjects(json)
     }
     fetchProjects()
-
   }, [])
 
   if (!projects) return 'Loading...'
   return (
-    <div>
-    <table>
-    <thead>
-      <tr>
-        <th>title</th>
-        <th>order</th>
-        <th>color</th>
-      </tr>
-    </thead>
-      <tbody>
-        {projects.map(project=>
-          <tr key={project._id}>
-            <td>{project.title}</td>
-            <td>{project.order}</td>
-            <td>{project.color}</td>
-          </tr>
-        )}
-      </tbody>
-    </table>
+    <div id='projects-wrapper'>
+      <Grid />
+      {projects.map(project =>
+        <Project
+          key={project._id}
+          project={project} />
+      )}
     </div>
   );
 }
 
 export default App;
+
