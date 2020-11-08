@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Sprint({ sprint, color }) {
+const Sprint = ({ sprint, color }) => {
+
     let start = new Date(sprint.start)
     let end = new Date(sprint.end)
     let diff = new Date(end - start).getDate()
 
     const StyledSprint = styled.div`
-        grid-column : ${start.getDate()}  / span ${diff};
+        grid-column : ${start.getDate() + 1}  / span ${diff};
         background-color : var(--color-${color});
         mix-blend-mode:multiply;
         height: var(--sprint-height);
@@ -36,9 +37,10 @@ export default function Sprint({ sprint, color }) {
             text-overflow: ellipsis;
             overflow:hidden;      
             letter-spacing: var(--letter-spacing);
-            &::first-letter{
-                margin-right: 3px;
+            i {
+                margin-right: 5px;
             }
+
 
         }
         progress {
@@ -61,10 +63,16 @@ export default function Sprint({ sprint, color }) {
         }
     `
 
+
     return (
         <StyledSprint>
-            <span>{sprint.title}</span>
-            <progress max={100} value={Math.floor(Math.random()*100)}></progress>
+            <span>
+                <i>{sprint.type}</i>
+                <strong>{sprint.title}</strong>
+            </span>
+            <progress max={100} value={50}></progress>
         </StyledSprint>
     )
 }
+
+export default React.memo(Sprint)

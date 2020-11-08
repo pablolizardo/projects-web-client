@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Header() {
+const Header = () => {
   const StyledHeader = styled.header`
     display: flex;
     align-items:center;
@@ -12,11 +12,7 @@ export default function Header() {
       font-weight: 800;
       letter-spacing: var(--letter-spacing);
     }
-    button.primary { 
-        background-color: var(--color-black);
-        color: var(--color-white);
-        font-weight: 600;
-    }
+    
     @media only screen and (max-width: 800px) {
         flex-direction: column;
     }
@@ -33,3 +29,5 @@ export default function Header() {
     </StyledHeader>
   );
 }
+
+export default React.memo(Header)

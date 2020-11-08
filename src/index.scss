@@ -11,33 +11,33 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 0.8rem;
-	color : var(--text-color);
-	background-color : var(--bg-color);
+	color: var(--text-color);
+	background-color: var(--bg-color);
 }
 :root {
 	--space: 1rem;
 	--sidebar-width: 100px;
 	--sprint-height: 30px;
 	--border-radius: 7px;
-	
+
 	--letter-spacing: -0.05em;
 
-	--color-yellow : #FFDE44;
-	--color-teal : #7ED4D4;
-	--color-purple : #947ED4;
-	--color-green : #74DC91;
-	--color-pink : #F7BECF;
-	--color-cyan : #44D2FF;
-	--color-blue : #8BAFDA;
-	--color-red : #E57373;
-	--color-orange : #E5AA73;
-	--color-light-gray : hsl(0,0%,90%);
-	--color-white : hsl(0,0%,99%);
-	--color-black : hsl(0,0%,20%);
+	--color-yellow: #ffde44;
+	--color-teal: #7ed4d4;
+	--color-purple: #947ed4;
+	--color-green: #74dc91;
+	--color-pink: #f7becf;
+	--color-cyan: #44d2ff;
+	--color-blue: #8bafda;
+	--color-red: #e57373;
+	--color-orange: #e5aa73;
+	--color-light-gray: hsl(0, 0%, 90%);
+	--color-white: hsl(0, 0%, 99%);
+	--color-black: hsl(0, 0%, 20%);
 
-	--text-color : var(--color-black);
-	--bg-color : var(--color-white);
-	
+	--primary-color: var(--color-teal);
+	--text-color: var(--color-black);
+	--bg-color: var(--color-white);
 }
 
 #projects-wrapper {
@@ -46,46 +46,56 @@ body {
 	row-gap: calc(var(--space) * 1.6);
 	-moz-row-gap: calc(var(--space) * 1.6);
 	-webkit-row-gap: calc(var(--space) * 1.6);
-	padding-top: calc(var(--space) * 1.6) ;
+	padding-top: calc(var(--space) * 1.6);
+	margin-top: calc(var(--space) * 2);
 	user-select: none;
 	position: relative;
-
 }
 
-.project-sprints {
-	display: grid;
-	width: 100%;
-	grid-template-columns: repeat(31, 1fr);
+.form {
+	display: flex;
 	align-items: center;
-	grid-auto-flow: column;
-	//  border:1px solid red; 
-	 user-select: none;
+	// grid-template-columns: repeat(7, 1fr);
 }
 
-input {
-	padding : calc(var(--space) / 2 ) var(--space);
+input,
+select,
+textarea {
+	padding: calc(var(--space) / 2) var(--space);
 	border-radius: var(--border-radius);
 	border: 1px solid var(--color-light-gray);
 }
 
 button {
-	padding : calc(var(--space) / 2 ) var(--space);
+	padding: calc(var(--space) / 2) var(--space);
 	border-radius: var(--border-radius);
 	background-color: var(--color-white);
-	border: none;
-	
+	border: 1px solid var(--color-light-gray);
+	&.primary {
+		background-color: var(--color-black);
+		color: var(--color-white);
+		font-weight: 600;
+		width: 40px;
+		height: 40px;
+		border-radius: 20px;
+		flex-shrink: 0;
+		padding: 0;
+	}
 }
-input , button, select { 
+input,
+button,
+select {
 	font-weight: 500;
-	margin: calc(var(--space) / 2 );
-	&:focus {
-		outline-offset: calc(var(--space)/6);
-		outline-color: var(--gray);
+	margin: calc(var(--space) / 2);
+	&:focus,
+	&:active {
+		outline-offset: calc(var(--space) / 6);
+		outline-color: var(--primary-color);
 		outline-style: dashed;
 		outline-width: var(--border-width);
-	  }
-	&:hover{
-		opacity: .8;
+	}
+	&:hover {
+		opacity: 0.8;
 		cursor: pointer;
 	}
 }

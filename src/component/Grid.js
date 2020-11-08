@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import AppContext from "../context/AppContext";
 
-export default function Grid() {
+const Grid = () => {
+  const context = useContext(AppContext)
   const StyledGrid = styled.div`
     position: absolute;
     top: 0;
@@ -13,7 +15,7 @@ export default function Grid() {
     height: 100%;
     /* padding: var(--space); */
     user-select: none;
-    grid-template-columns: repeat(31, 1fr);
+    grid-template-columns: repeat(${context.daysInMonth}, 1fr);
     /* border:1px dotted cyan; */
     figure {
       &::before {
@@ -28,11 +30,14 @@ export default function Grid() {
       height: 100%;
     }
   `;
+
   return (
     <StyledGrid>
-      {Array.from({ length: 31 }).map((l, i) => (
+      {Array.from({ length: context.daysInMonth }).map((l, i) => (
         <figure data-day={i + 1} key={i} />
       ))}
     </StyledGrid>
   );
 }
+
+export default React.memo(Grid)
