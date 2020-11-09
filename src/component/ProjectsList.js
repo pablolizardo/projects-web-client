@@ -3,11 +3,16 @@ import { AppContext } from "../context/AppContext"
 
 const ProjectsList = () => {
     const context = useContext(AppContext)
-    
+
     return (
         <div id='project-list'>
             {context.projects.map((project) => {
-                return <h4 key={project.title}>{project.title}</h4>
+                return <h4
+                    key={project.title}
+                    style={{
+                        color: `var(--color-${project.color})`
+                    }}
+                >{project.title}</h4>
             })}
         </div>
     )
