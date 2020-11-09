@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import AppContextWrapper from './context/AppContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppContextWrapper>
+      <App />
+    </AppContextWrapper>
   </React.StrictMode>,
   document.getElementById('root')
 );

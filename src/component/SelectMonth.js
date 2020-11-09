@@ -1,11 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { AppContext } from '../context/AppContext'
-
 const SelectMonth = () => {
     const context = useContext(AppContext)
-    const handleChange = (e) => { context.setCurrentMonth(e.target.value) }
+    const linkRef = useRef()
+    const handleChange = (e) => { 
+        linkRef.current.href = `#month-${e.target.value}`
+        linkRef.current.click()
+    }
+
     return (
-        <div style={{ position: 'fixed', bottom: 20, left: 10, zIndex: 99 }}>
+        <>
+            <a style={{ display:"none"}} ref={linkRef} href='#month-01' id='link-ref'>move</a>
             <select defaultValue={context.currentMonth} onChange={handleChange}>
                 <option value='01'>January</option>
                 <option value='02'>February</option>
@@ -20,7 +25,7 @@ const SelectMonth = () => {
                 <option value='11'>November</option>
                 <option value='12'>December</option>
             </select>
-        </div>
+            </>
     )
 }
 

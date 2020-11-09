@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { createContext } from 'react'
 import useSWR from 'swr'
 import fetcher from '../utils/fetcher'
@@ -11,8 +11,9 @@ const AppContextWrapper = ({ children }) => {
 
     const options = { revalidateOnFocus: false, }
     const { data: projects, error } = useSWR(`${process.env.REACT_APP_API_URL}/projects`, fetcher, options)
-
+    const scrollRef = useRef()
     const [currentMonth, setCurrentMonth] = useState(11)
+    const [showForms, setShowForms] = useState(false)
 
     const value = {
         daysInMonth: getDaysInMonth(currentMonth),
@@ -20,6 +21,9 @@ const AppContextWrapper = ({ children }) => {
         dayNumbers: getDayNumbers(),
         yearWidth: 10000,
         projects,
+        scrollRef,
+        showForms,
+        setShowForms,
         currentMonth,
         setCurrentMonth
     }
