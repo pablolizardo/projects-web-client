@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { mutate } from 'swr'
+import { AppContext } from '../context/AppContext'
 
-const FormAddSprint = ({ projects }) => {
-
+const FormAddSprint = () => {
+    const context = useContext(AppContext)
     const [sprint, setSprint] = useState({
         title: '',
         type: 'dev',
@@ -43,7 +44,7 @@ const FormAddSprint = ({ projects }) => {
 
                 <select name='project' onChange={handleChange}>
                     <option></option>
-                    {projects.map((project, index) =>
+                    {context.projects.map((project, index) =>
                         <option key={index} value={project._id}>{project.title}</option>
                     )}
                 </select>

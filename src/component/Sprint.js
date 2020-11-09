@@ -1,14 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
+import getPositionInGrid from '../utils/getPositionInGrid'
 
 const Sprint = ({ sprint, color }) => {
 
     let start = new Date(sprint.start)
     let end = new Date(sprint.end)
     let diff = new Date(end - start).getDate()
+    // console.log('start', start.toISOString().split('T')[0])
 
     const StyledSprint = styled.div`
-        grid-column : ${start.getDate() + 1}  / span ${diff};
+        grid-column : ${getPositionInGrid(start.toISOString().split('T')[0])}  / span ${diff};
         background-color : var(--color-${color});
         mix-blend-mode:multiply;
         height: var(--sprint-height);

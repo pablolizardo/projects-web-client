@@ -1,21 +1,21 @@
 import React, { useContext } from 'react'
-import AppContext from '../context/AppContext'
+import { AppContext } from '../context/AppContext'
 
-const SelectMonth = ({ setMonth }) => {
+const SelectMonth = () => {
     const context = useContext(AppContext)
-    const handleChange = (e) => { setMonth(e.target.value) }
+    const handleChange = (e) => { context.setCurrentMonth(e.target.value) }
     return (
-        <div>
-            <select defaultValue={context.month} onChange={handleChange}>
-                <option value='1'>January</option>
-                <option value='2'>February</option>
-                <option value='3'>March</option>
-                <option value='4'>April</option>
-                <option value='5'>May</option>
-                <option value='6'>June</option>
-                <option value='7'>July</option>
-                <option value='8'>Agost</option>
-                <option value='9'>September</option>
+        <div style={{ position: 'fixed', bottom: 20, left: 10, zIndex: 99 }}>
+            <select defaultValue={context.currentMonth} onChange={handleChange}>
+                <option value='01'>January</option>
+                <option value='02'>February</option>
+                <option value='03'>March</option>
+                <option value='04'>April</option>
+                <option value='05'>May</option>
+                <option value='06'>June</option>
+                <option value='07'>July</option>
+                <option value='08'>Agost</option>
+                <option value='09'>September</option>
                 <option value='10'>October</option>
                 <option value='11'>November</option>
                 <option value='12'>December</option>

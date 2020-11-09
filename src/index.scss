@@ -16,7 +16,7 @@ body {
 }
 :root {
 	--space: 1rem;
-	--sidebar-width: 100px;
+	--sidebar-width: 120px;
 	--sprint-height: 30px;
 	--border-radius: 7px;
 
@@ -38,18 +38,6 @@ body {
 	--primary-color: var(--color-teal);
 	--text-color: var(--color-black);
 	--bg-color: var(--color-white);
-}
-
-#projects-wrapper {
-	display: flex;
-	flex-direction: column;
-	row-gap: calc(var(--space) * 1.6);
-	-moz-row-gap: calc(var(--space) * 1.6);
-	-webkit-row-gap: calc(var(--space) * 1.6);
-	padding-top: calc(var(--space) * 1.6);
-	margin-top: calc(var(--space) * 2);
-	user-select: none;
-	position: relative;
 }
 
 .form {

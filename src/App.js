@@ -1,49 +1,28 @@
-import React, { useEffect, useState } from "react"
-import useSWR from "swr"
-import FormAddSprint from "./component/FormAddSprint"
-import FormAddProject from "./component/FormAddProject"
-import Grid from "./component/Grid"
+import React from "react"
 import Header from "./component/Header"
-import Project from "./component/Project"
-import fetcher from "./utils/fetcher"
-import SelectMonth from "./component/SelectMonth"
-import AppContext from "./context/AppContext"
-
+import ProjectsList from "./component/ProjectsList"
+import ProjectsView from "./component/ProjectsView"
+import ProjectsWrapper from "./component/ProjectsWrapper"
+import AppContextWrapper from "./context/AppContext"
+import FormAddSprint from './component/FormAddSprint'
 function App() {
-
-  const options = {
-    revalidateOnFocus: false,
-  }
-  const { data: projects, error } = useSWR(
-    `${process.env.REACT_APP_API_URL}/projects`,
-    fetcher,
-    options
-  )
-  const [month, setMonth] = useState(11)
-  const [daysInMonth, setDaysInMonth] = useState(1)
-
-  useEffect(() => {
-    let date = new Date(2020, month, 0)
-    setDaysInMonth(date.getDate())
-  }, [month])
-
-  if (error) return <div>failed to load</div>
-  if (!projects) return "Loading..."
   return (
-    <AppContext.Provider value={{ month, daysInMonth }}>
-      <main>
+    <AppContextWrapper>
+      <div>
         <Header />
-        <SelectMonth setMonth={setMonth} />
-        <FormAddProject />
-        <FormAddSprint projects={projects} />
-        <div id="projects-wrapper">
-          <Grid />
-          {projects.map((project) => (
-            <Project key={project._id} project={project} />
-          ))}
+        <FormAddSprint />
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'var(--sidebar-width) 1fr'
+
+        }}>
+          <ProjectsList />
+          <ProjectsWrapper >
+            <ProjectsView />
+          </ProjectsWrapper>
         </div>
-      </main>
-    </AppContext.Provider>
+      </div>
+    </AppContextWrapper>
   )
 }
 
