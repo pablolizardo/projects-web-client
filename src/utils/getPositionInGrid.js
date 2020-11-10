@@ -6,7 +6,7 @@ const getPositionInGrid = (date) => {
 
     let positionInYear = 0
 
-    Array.from({ length: month }).map((m, i) => {
+    Array.from({ length: month }).forEach((m, i) => {
         let day = new Date(2020, i + 1, 0)
         positionInYear += day.getDate()
     })

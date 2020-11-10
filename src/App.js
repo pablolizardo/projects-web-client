@@ -9,7 +9,7 @@ import FormAddProject from "./component/FormAddProject";
 function App() {
   const context = useContext(AppContext);
   return (
-    <div>
+    <main id="app-container">
       <Header />
       {context.showForms && (
         <>
@@ -17,18 +17,13 @@ function App() {
           <FormAddSprint />
         </>
       )}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "var(--sidebar-width) 1fr",
-        }}
-      >
+      <div style={{ position: "relative", }} >
         <ProjectsList />
-        <ProjectsWrapper>
-          <ProjectsView />
-        </ProjectsWrapper>
+          <ProjectsWrapper>
+            <ProjectsView />
+          </ProjectsWrapper>
       </div>
-    </div>
+    </main>
   );
 }
 

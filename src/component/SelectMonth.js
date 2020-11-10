@@ -1,12 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../context/AppContext'
 import getScrollPos from './../utils/getScrollPos'
 const SelectMonth = () => {
+    const sidebarWidth = 100
     const context = useContext(AppContext)
     const handleChange = (e) => {
         let element = document.getElementById('project-scroll')
-        element.scrollLeft = getScrollPos(e.target.value) - 30
+        element.scrollLeft = getScrollPos(e.target.value) - (30 + sidebarWidth)
+        context.setCurrentMonth(e.target.value)
     }
+    useEffect(() => {
+        let element = document.getElementById('project-scroll')
+        element.scrollLeft = getScrollPos(context.currentMonth) - (30  + sidebarWidth)
+    }, [context.currentMonth])
 
     return (
         <select defaultValue={context.currentMonth} onChange={handleChange}>
