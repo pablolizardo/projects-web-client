@@ -9,6 +9,7 @@
 /* width */
 *::-webkit-scrollbar {
 	width: var(--space);
+	height: var(--space);
 	* {
 		cursor: pointer;
 	}
@@ -109,6 +110,13 @@ header {
 	grid-template-rows: auto 1fr;
 	grid-template-columns: 100vw;
 	overflow-x: hidden;
+}
+.card {
+	padding :var(--space);
+	margin :var(--space);
+	height: fit-content;
+	border-radius: var(--border-radius);
+	border: 1px solid var(--color-light-gray);
 }
 #project-view {
 	position: relative;

@@ -44,4 +44,4 @@ const Sprint = ({ sprint, color, type , clientOnly }) => {
     )
 }
 
-export default React.memo(Sprint)
+export default Sprint

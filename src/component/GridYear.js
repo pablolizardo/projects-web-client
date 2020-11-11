@@ -3,23 +3,7 @@ import { AppContext } from "../context/AppContext";
 
 const Grid = () => {
   const context = useContext(AppContext);
-  const months = [
-    '',
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'Agost',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-
-
+ 
   return (
     <div id="project-grid-year" style={{ width: `${context.yearWidth}px`, gridTemplateColumns: `repeat(${context.daysInYear}, 1fr)`, }} >
       {context.dayNumbers.map((day, index) => {

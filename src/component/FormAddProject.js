@@ -1,21 +1,23 @@
 import React, { useContext, useState } from 'react'
 import { mutate } from 'swr'
+import { colors, types } from '../consts'
 import { AppContext } from '../context/AppContext'
-import fetcher from '../utils/fetcher'
 
 const FormAddProject = () => {
     const context = useContext(AppContext)
     const [project, setProject] = useState({
-        title: '',
+        title: `Proj ${Math.floor(Math.random()*100)}`,
         color: 'pink',
         priority: 1,
-        type: 'sprints'
+        type: 'sprints',
+        sprints : []
     })
-   
+    const handleChange = e => { setProject(project => ({ ...project, [e.target.name]: e.target.value })) }
+
     const handleSumbit = async (e) => {
         e.preventDefault()
         context.setShowForms(false)
-        mutate(`${process.env.REACT_APP_API_URL}/projects`, [...context.projects, {...project, clientOnly : true}], false)
+        mutate(`${process.env.REACT_APP_API_URL}/projects`, [...context.projects, {...project, clientOnly : true, _id:Math.floor(Math.random()*999)}], false)
         await fetch(`${process.env.REACT_APP_API_URL}/projects`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -23,24 +25,8 @@ const FormAddProject = () => {
         })
         mutate(`${process.env.REACT_APP_API_URL}/projects`)
     }
-    const handleChange = e => { 
-        setProject(project => ({ ...project, [e.target.name]: e.target.value })) 
-    }
-    const colors = [
-        { value: 'pink', label: 'Pink' },
-        { value: 'green', label: 'Green' },
-        { value: 'purple', label: 'Purple' },
-        { value: 'blue', label: 'Blue' },
-        { value: 'red', label: 'Red' },
-        { value: 'teal', label: 'Teal' },
-        { value: 'yellow', label: 'Yellow' },
-        { value: 'cyan', label: 'Cyan' },
-    ]
-    const type = [
-        { value: 'sprints', label: '🏃‍♂️ Sprint' },
-        { value: 'rc', label: '🌀 Release Cycle' },
-
-    ]
+    
+    
     return (
         <div>
             <h3>New Project</h3>
@@ -52,7 +38,7 @@ const FormAddProject = () => {
                     )}
                 </select>
                 <select name='type' onChange={handleChange} defaultValue={project.type}>
-                    {type.map(({ value, label }) =>
+                    {types.map(({ value, label }) =>
                         <option key={value} value={value}>{label}</option>
                     )}
                 </select>
@@ -62,4 +48,4 @@ const FormAddProject = () => {
     )
 }
 
-export default React.memo(FormAddProject)
+export default FormAddProject

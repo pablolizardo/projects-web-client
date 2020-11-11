@@ -28,4 +28,4 @@ const Project = ({ project }) => {
 	)
 }
 
-export default React.memo(Project)
+export default Project

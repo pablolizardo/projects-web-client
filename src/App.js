@@ -19,15 +19,21 @@ function App() {
           <FormAddSprint />
         </div>
       )}
+      {/* <div className='card'>
+          <FormAddProject />
+      </div> */}
       <div style={{ position: "relative", }} >
         <div id="project-list">
           {context.projects.map((project) => 
               <div key={project.title} >
-                <h4 style={{ color: `var(--color-${project.color})`, }} > {project.title} </h4>
+                <h4 style={{ 
+                  color: project.clientOnly ? 'var(--color-gray)' : `var(--color-${project.color})`, 
+                  opacity : project.clientOnly ? '.5' : 1
+                  }} > {project.title} </h4>
               </div>
           )}
         </div>
-        <div ref={context.scrollRef} id='project-scroll'>
+        <div id='project-scroll' ref={context.scrollRef} >
           <div id='project-view' style={{ width: `${context.yearWidth}px` }}>
             <GridYear />
             <GridToday />

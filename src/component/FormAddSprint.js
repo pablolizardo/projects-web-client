@@ -68,4 +68,4 @@ const FormAddSprint = () => {
     )
 }
 
-export default React.memo(FormAddSprint)
+export default FormAddSprint
