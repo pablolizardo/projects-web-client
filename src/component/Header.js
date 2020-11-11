@@ -10,11 +10,11 @@ const Header = () => {
   return (
     <header>
       <h1>Projects</h1>
-      <input placeholder="Search..."></input>
+      {/* <input placeholder="Search..."></input> */}
       <div>
         <SelectMonth />
-        <button>Idea</button>
-        <button>View</button>
+        {/* <button>Idea</button> */}
+        {/* <button>View</button> */}
         <button className='primary' onClick={handleShowForms}>+</button>
       </div>
     </header>

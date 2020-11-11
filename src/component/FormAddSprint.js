@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { mutate } from 'swr'
 import { AppContext } from '../context/AppContext'
+import fetcher from '../utils/fetcher'
 
 const FormAddSprint = () => {
     const context = useContext(AppContext)
@@ -12,19 +13,24 @@ const FormAddSprint = () => {
         project: null
     })
     const postSprint = async () => {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/sprints`, {
+        await fetcher(`${process.env.REACT_APP_API_URL}/sprints`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(sprint)
         })
-        const json = await res.json()
-        return json
+        updateProjects()
     }
-
-    const handleSumbit = async (e) => {
+    const updateProjects = async () => {
+        const res = await fetcher(`${process.env.REACT_APP_API_URL}/projects`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(sprint)
+        })
+    }
+    const handleSumbit = (e) => {
+        context.setShowForms(false)
         e.preventDefault()
-        await postSprint()
-        mutate(`${process.env.REACT_APP_API_URL}/projects`)
+        postSprint()
     }
     const handleChange = e => {
         setSprint({ ...sprint, [e.target.name]: e.target.value })
@@ -38,7 +44,7 @@ const FormAddSprint = () => {
     ]
     return (
         <div>
-            <label>New Sprint</label>
+            <h3>New Sprint</h3>
 
             <div className='form'>
 

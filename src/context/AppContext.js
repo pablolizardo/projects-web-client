@@ -8,9 +8,7 @@ import getDaysInYear from '../utils/getDaysInYear'
 export const AppContext = createContext()
 
 const AppContextWrapper = ({ children }) => {
-
-    const options = { revalidateOnFocus: false, }
-    const { data: projects, error } = useSWR(`${process.env.REACT_APP_API_URL}/projects`, fetcher, options)
+    const { data: projects, error} = useSWR(`${process.env.REACT_APP_API_URL}/projects`, fetcher)
     const scrollRef = useRef()
     const [currentMonth, setCurrentMonth] = useState(11)
     const [showForms, setShowForms] = useState(false)

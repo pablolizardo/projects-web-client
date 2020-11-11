@@ -7,10 +7,10 @@ const Project = ({ project }) => {
 
 	return (
 		<div id="project-wrap"
-		style={{
-			width: `${context.yearWidth}px`,
-			color: `var(--color-${project.color})`
-		}}>
+			style={{
+				width: `${context.yearWidth}px`,
+				color: `var(--color-${project.color})`
+			}}>
 			<figure style={{ backgroundColor: `var(--color-${project.color})` }} />
 			<div className="project-sprints" style={{ gridTemplateColumns: `repeat(${context.daysInYear}, 1fr)` }} >
 				{project.sprints
@@ -18,7 +18,9 @@ const Project = ({ project }) => {
 						<Sprint
 							key={sprint._id}
 							sprint={sprint}
+							type={project.type}
 							color={project.color}
+							clientOnly={project.clientOnly}
 						/>
 					))}
 			</div>
