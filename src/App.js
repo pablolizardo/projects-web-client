@@ -16,12 +16,13 @@ function App() {
         <div id='modal'>
           <button className='primary' onClick={handleCloseModal}>x</button>
           <FormAddProject />
-          <FormAddSprint />
+          <FormAddSprint /> 
         </div>
       )}
-      {/* <div className='card'>
-          <FormAddProject />
-      </div> */}
+      {/* <div className='card'> */}
+          {/* <FormAddSprint /> */}
+          {/* <FormAddProject /> */}
+      {/* </div> */}
       <div style={{ position: "relative", }} >
         <div id="project-list">
           {context.projects.map((project) => 

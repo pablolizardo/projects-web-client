@@ -1,53 +1,38 @@
 import React, { useContext, useState } from 'react'
 import { mutate } from 'swr'
+import { sprintTypes } from '../consts'
 import { AppContext } from '../context/AppContext'
 import fetcher from '../utils/fetcher'
 
 const FormAddSprint = () => {
     const context = useContext(AppContext)
     const [sprint, setSprint] = useState({
-        title: '',
+        title: `Sprint ${Math.floor(Math.random() * 100)}`,
         type: 'dev',
         start: new Date().toISOString().split('T')[0],
         end: new Date().toISOString().split('T')[0],
-        project: null
+        project: null,
     })
-    const postSprint = async () => {
+
+    const handleChange = e => {
+        setSprint({ ...sprint, [e.target.name]: e.target.value })
+    }
+
+    const handleSumbit = async (e) => {
+        context.setShowForms(false)
+        e.preventDefault()
         await fetcher(`${process.env.REACT_APP_API_URL}/sprints`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(sprint)
         })
-        updateProjects()
+        mutate(`${process.env.REACT_APP_API_URL}/projects`)
     }
-    const updateProjects = async () => {
-        const res = await fetcher(`${process.env.REACT_APP_API_URL}/projects`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(sprint)
-        })
-    }
-    const handleSumbit = (e) => {
-        context.setShowForms(false)
-        e.preventDefault()
-        postSprint()
-    }
-    const handleChange = e => {
-        setSprint({ ...sprint, [e.target.name]: e.target.value })
-    }
-    const types = [
-        { value: '📚', label: '📚 Docs' },
-        { value: '👨‍💻', label: '👨‍💻 Dev' },
-        { value: '🚀', label: '🚀 Deploy' },
-        { value: '👨🏻‍🔬', label: '👨🏻‍🔬 Test' },
-        { value: '💅', label: '💅 Design' },
-    ]
+
     return (
         <div>
             <h3>New Sprint</h3>
-
             <div className='form'>
-
                 <select name='project' onChange={handleChange}>
                     <option></option>
                     {context.projects.map((project, index) =>
@@ -55,7 +40,7 @@ const FormAddSprint = () => {
                     )}
                 </select>
                 <select name='type' onChange={handleChange}>
-                    {types.map(({ value, label }) =>
+                    {sprintTypes.map(({ value, label }) =>
                         <option key={value} value={value}>{label}</option>
                     )}
                 </select>

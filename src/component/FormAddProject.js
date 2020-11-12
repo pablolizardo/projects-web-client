@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { mutate } from 'swr'
-import { colors, types } from '../consts'
+import { colors, projectTypes } from '../consts'
 import { AppContext } from '../context/AppContext'
 
 const FormAddProject = () => {
@@ -38,7 +38,7 @@ const FormAddProject = () => {
                     )}
                 </select>
                 <select name='type' onChange={handleChange} defaultValue={project.type}>
-                    {types.map(({ value, label }) =>
+                    {projectTypes.map(({ value, label }) =>
                         <option key={value} value={value}>{label}</option>
                     )}
                 </select>

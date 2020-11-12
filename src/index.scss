@@ -358,13 +358,19 @@ header {
 		margin: 0;
 		padding: 0;
 		height: 7px;
+		cursor: ew-resize;
+		border-bottom-right-radius: var(--border-radius);
+
+		&:hover{
+			background-color: rgba(0, 0, 0, 0.2);
+		}
 	}
 	progress::-webkit-progress-bar {
 		background-color: transparent;
 	}
 	progress::-webkit-progress-value {
 		// background-color: var(--color-yellow);
-		background-color: rgba(0, 0, 0, 0.1);
+		background-color: rgba(0, 0, 0, 0.5);
 		mix-blend-mode: multiply;
 		border-bottom-left-radius: var(--border-radius);
 	}

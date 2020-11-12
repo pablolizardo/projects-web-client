@@ -12,12 +12,14 @@ const AppContextWrapper = ({ children }) => {
     const scrollRef = useRef()
     const [currentMonth, setCurrentMonth] = useState(11)
     const [showForms, setShowForms] = useState(false)
+    const [yearWidth, setYearWidth] = useState(10000)
 
     const value = {
         daysInMonth: getDaysInMonth(currentMonth),
         daysInYear: getDaysInYear(),
         dayNumbers: getDayNumbers(),
-        yearWidth: 10000,
+        yearWidth,
+        setYearWidth,
         projects,
         scrollRef,
         showForms,

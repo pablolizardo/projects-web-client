@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { AppContext } from '../context/AppContext'
 import getDaysInYear from '../utils/getDaysInYear'
 import getPositionInGrid from '../utils/getPositionInGrid'
 
 const GridToday = () => {
     const [leftPos, setLeftPos] = useState()
-
+    const { yearWidth } = useContext(AppContext)
     useEffect(() => {
-        let today = new Date()
+        let today = new Date() 
+        today.setDate(today.getDate() - 1);
         let position = getPositionInGrid(today.toISOString().split('T')[0])
-        const yearWidth = 10000
         const daysInYear = getDaysInYear()
         setLeftPos(Math.floor(((position * yearWidth) / daysInYear) - 2))
         console.log(leftPos)
-    }, [leftPos])
+    }, [yearWidth, leftPos])
 
     return leftPos ? <div id='grid-today' style={{ left: Math.floor(leftPos) - 2 }}>
     </div> : ''

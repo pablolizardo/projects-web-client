@@ -1,16 +1,24 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { AppContext } from '../context/AppContext'
+import getDaysInYear from '../utils/getDaysInYear'
 import getPositionInGrid from '../utils/getPositionInGrid'
 
 const Sprint = ({ sprint, color, type , clientOnly }) => {
-
+    const { yearWidth } = useContext(AppContext)
     const start = new Date(sprint.start)
     const end = new Date(sprint.end)
     const diff = new Date(end - start).getDate()
-    const dayWidth = 10000/366 //had to fix it.
+    const dayWidth = yearWidth / getDaysInYear()
     const [distanceMoved, setDistanceMoved] = useState(0)
     const [isDragging, setIsDragging] = useState(false)
 
-    const startDragging = () => { setIsDragging(true) }
+    const startDragging = (e) => { 
+        // console.log('click parent' ,e)
+        if(e.target.nodeName === 'DIV'){
+            setIsDragging(true) 
+        }
+
+    }
     const stopDragging = () => { setIsDragging(false) }
     const handleDragging = e => { isDragging && setDistanceMoved(distanceMoved => distanceMoved += e.movementX ) }
     const gridStart = getPositionInGrid(start.toISOString().split('T')[0]) + Math.floor(distanceMoved / dayWidth)
@@ -21,7 +29,7 @@ const Sprint = ({ sprint, color, type , clientOnly }) => {
 
     const handleDelete = () => { window.confirm('Are you sure?') }
     return (
-        <div className='project-sprint'
+        <div className='project-sprint' 
             onMouseDownCapture={startDragging}
             onMouseMove={handleDragging}
             onMouseUpCapture={stopDragging}
@@ -38,10 +46,39 @@ const Sprint = ({ sprint, color, type , clientOnly }) => {
                 <span onClick={handleSprintOptions}>···</span>
             </div>
             { showMenu && <div className='project-sprint-menu' onClick={handleDelete}> </div> }
-
-            <progress max={100} value={50} ></progress>
+            <SprintProgress progress={sprint.progress}/>
         </div>
     )
 }
 
+
+const SprintProgress = (progress) => {
+
+    const [isDragging , setIsDragging] = useState(false)
+    const [ newProgress , setNewProgress ] = useState(progress)
+    const [ movementX, setMovementX ] = useState(0)
+    const startDragging = e => {
+        setIsDragging(true)
+    }
+    const handleDragging = e => {
+        if( isDragging ) {
+            setMovementX( movementX => movementX += e.movementX)
+            console.log('dragging x => ' , Math.floor(movementX / 10) *10)
+            setNewProgress(Math.floor(movementX / 10) *10)
+        }
+    }
+    const stopDragging = e => {
+        setIsDragging(false)
+    }
+
+    return <progress 
+    // style={{pointerEvents: 'none'}}
+        max={100} 
+        value={newProgress}
+        onMouseDownCapture={startDragging}
+        onMouseMove={handleDragging}
+        onMouseUpCapture={stopDragging}
+        onMouseLeave={stopDragging}
+     ></progress>
+}
 export default Sprint
