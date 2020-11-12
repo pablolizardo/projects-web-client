@@ -183,14 +183,16 @@ header {
 
 #project-wrap {
 	display: flex;
-	align-items: flex-end;
+	align-items: flex-start;
 	position: relative;
-	height: calc(var(--sprint-height) * 2);
+	min-height: var(--sprint-height) ;
+	margin-bottom: calc(var(--sprint-height) );
+	
 	figure {
 		width: 100%;
-		height: var(--sprint-height);
+		min-height: 100%;
 		position: absolute;
-		bottom: 0;
+		top: 0;
 		left: calc(var(--space) * -1);
 		opacity: 0.2;
 	}
@@ -208,14 +210,14 @@ header {
 }
 
 #grid-today {
-	height: calc(100% + 60px);
+	--today-distance : 100px;
+	height: calc(100% + var(--today-distance));
 	border-radius: var(--border-radius);
 	width: 2px;
 	background-color: var(--color-black);
-	// border-left: 2px dotted  var(--primary-color)
 	position: absolute;
 	opacity: 0.9;
-	top: -50px;
+	top: -var(--today-distance);
 	user-select: none;
 	pointer-events: none;
 	bottom: 0;
@@ -232,8 +234,9 @@ header {
 	}
 }
 #project-grid-year {
+	--days-distance : 70px;
 	position: absolute;
-	top: var(--space);
+	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
@@ -250,26 +253,26 @@ header {
 				content: attr(data-month);
 				position: absolute;
 				// background-color: red;
-				top: -50px;
+				top: calc( var(--days-distance) * -1 ) ;
 				// margin-left: -2px;
 				color: var(--color-gray);
 				font-size: 0.6rem;
-				padding-left: 4px ;
+				padding-left: 7px ;
 				height: 10px;
 				width: 10px;
 			}
 			
 			// position: absolute;
-			// margin-top: -50px;
+			margin-top: calc( var(--days-distance) * -1 ) ;
 			background-color: rgba(0, 0, 0, 0.1);
-			// height: calc(100% + 50px);
+			height: calc(100% + var(--days-distance));
 		}
 		&::before {
 			content: attr(data-day);
 			position: absolute;
-			top: calc(var(--space) * -1);
+			top: calc(var(--space) * -2.7);
 			margin-left: -2px;
-			color: var(--color-light-gray);
+			color: var(--color-gray);
 			font-size: 0.4rem;
 		}
 	}
@@ -285,21 +288,24 @@ header {
 
 .project-sprint {
 	// mix-blend-mode: multiply;
-	height: var(--sprint-height);
+	min-height: var(--sprint-height);
 	border-radius: var(--border-radius);
+	transition: height .2s ;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	position: relative;
 	color: var(--text-color);
 	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
 	&.project-type-rc { 
 		strong {
 			margin-left: 10px;
 			text-overflow: ellipsis;
 			width: auto;
 			overflow: hidden;
+			pointer-events: none;
 		}
 	}
 	&:hover {
@@ -308,7 +314,7 @@ header {
 	}
 	&:active , &:focus{
 		cursor: grabbing;
-		opacity: 0.6!important;
+		opacity: 0.7!important;
 	}
 
 	.sprint-tail {
@@ -386,7 +392,15 @@ header {
 	}
 	
 }
-
+.project-sprint-details {
+	padding: var(--space);
+	font-size: .7rem;
+	font-weight: 600;
+	overflow: hidden;
+	ul li {
+		margin: 0; padding : 0; list-style-type: none;
+	}
+}
 // forms
 .form {
 	width: 100%;

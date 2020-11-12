@@ -14,7 +14,13 @@ const Sprint = ({ sprint, color, type , clientOnly }) => {
     const dayWidth = yearWidth / getDaysInYear()
     const [distanceMoved, setDistanceMoved] = useState(0)
     const [isDragging, setIsDragging] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
+    const handleOnClick = () => {
+        if( !isDragging ){
+            setIsOpen(!isOpen)
+        }
+    }
     const startDragging = e => { e.target.nodeName === 'DIV' && setIsDragging(true) }
     const handleDragging = e => { isDragging && setDistanceMoved(distanceMoved => distanceMoved += e.movementX ) }
     const stopDragging = () => { setIsDragging(false) }
@@ -28,16 +34,26 @@ const Sprint = ({ sprint, color, type , clientOnly }) => {
             onMouseMove={handleDragging}
             onMouseUpCapture={stopDragging}
             onMouseLeave={stopDragging}
-            
+            onDoubleClick={handleOnClick} 
             style={{
                 gridColumn: `${gridStart}  / span ${gridSpan}`,
                 backgroundColor: `var(--color-${color})`,
                 borderRadius: type === 'rc' ? '20px' : 'var(--border-radius)', 
                 opacity: clientOnly ? '0.5' : 1,
+                height: isOpen ? 'fit-content' : '0'
                 // border: '1px solid red'
             }}>
             { type !== 'rc' && <SprintHeader sprint={sprint}/>}
-            { type === 'rc' && <strong>{sprint.title}</strong>}
+            { type === 'rc' && !isOpen && <strong>{sprint.title}</strong>}
+                            { isOpen && <p className='project-sprint-details'>
+                            <ul>
+                                <li>{sprint.type}  {sprint.title} </li>
+                                <li>{sprint.type}  {sprint.title} </li>
+                                <li>{sprint.type}  {sprint.title} </li>
+                                <li>{sprint.type}  {sprint.title} </li>
+                            </ul>
+                            
+                        </p>}
             { type !== 'rc' && <SprintProgress progress={sprint.progress} color={color}/>}
             <span className='sprint-tail'></span>
         </div>
