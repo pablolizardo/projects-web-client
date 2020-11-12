@@ -47,7 +47,7 @@ const FormAddSprint = () => {
                 <input name='title' type='text' onChange={handleChange} defaultValue={sprint.title} />
                 <input name='start' type='date' defaultValue={sprint.start} onChange={handleChange} />
                 <input name='end' type='date' defaultValue={sprint.end} onChange={handleChange} />
-                <button className='primary' onClick={handleSumbit}> + </button>
+                <button onClick={handleSumbit}> + </button>
             </div>
         </div>
     )

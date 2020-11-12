@@ -42,7 +42,7 @@ const FormAddProject = () => {
                         <option key={value} value={value}>{label}</option>
                     )}
                 </select>
-                <button className='primary' onClick={handleSumbit}> + </button>
+                <button onClick={handleSumbit}> + </button>
             </div>
         </div>
     )
