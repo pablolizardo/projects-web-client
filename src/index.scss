@@ -281,7 +281,7 @@ header {
 .project-sprints {
 	display: grid;
 	width: 100%;
-	align-items: center;
+	align-items: flex-start;
 	grid-auto-flow: column;
 	// user-select: none;
 }
@@ -290,7 +290,7 @@ header {
 	// mix-blend-mode: multiply;
 	min-height: var(--sprint-height);
 	border-radius: var(--border-radius);
-	transition: height .2s ;
+	transition: .2s ;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	position: relative;
