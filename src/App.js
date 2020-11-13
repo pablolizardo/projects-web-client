@@ -6,9 +6,11 @@ import FormAddProject from "./component/FormAddProject";
 import GridYear from "./component/GridYear";
 import GridToday from "./component/GridToday";
 import Project from "./component/Project";
+import FormAddTask from "./component/FormAddTask";
 function App() {
   const context = useContext(AppContext);
   const handleCloseModal = () => { context.setShowForms(false) }
+  const handlePan = (e) => { console.log(e) }
   return (
     <main id="app-container">
       <Header />
@@ -17,12 +19,9 @@ function App() {
           <button className='primary' onClick={handleCloseModal}>x</button>
           <FormAddProject />
           <FormAddSprint /> 
+          <FormAddTask /> 
         </div>
       )}
-      {/* <div className='card'> */}
-          {/* <FormAddSprint /> */}
-          {/* <FormAddProject /> */}
-      {/* </div> */}
       <div style={{ position: "relative", }} >
         <div id="project-list">
           {context.projects.map((project) => 
@@ -34,7 +33,7 @@ function App() {
               </div>
           )}
         </div>
-        <div id='project-scroll' ref={context.scrollRef} >
+        <div id='project-scroll' ref={context.scrollRef} onAuxClick={handlePan}>
           <div id='project-view' style={{ width: `${context.yearWidth}px` }}>
             <GridYear />
             <GridToday />
