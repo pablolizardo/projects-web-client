@@ -42,10 +42,16 @@ body {
 }
 :root {
 	--space: 1rem;
-	--sidebar-width: 200px;
+	--sidebar-width: 160px;
 	--header-height: 180px;
 	--sprint-height: 30px;
-	--border-radius: 6px;
+  --border-radius: 6px;
+
+  --icon-sm: 16px;
+  --icon-base: 24px;
+  --icon-lg: 32px;
+  --icon-xl: 48px;
+
 
 	--letter-spacing: -0.05em;
 
@@ -99,22 +105,19 @@ header {
 
 #modal {
 	min-width: 700px;
-	width: 50%;;
+	width: calc(100% - calc(var(--space) * 5 ));
+
 	height: fit-content;
 	margin: auto;
-	position: absolute;
+	// position: absolute;
 	top: 54px;
 	right: 32px;
 	background-color: white;
-	z-index: 49;
+	z-index: 349;
 	padding: var(--space);
 	border-radius: var(--border-radius);
 	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-	& > button {
-		position: absolute;
-		right: calc(var(--space) * -1);
-		top: calc(var(--space) * -1);
-	}
+
 }
 #app-container {
 	// border:'2px solid red',
@@ -133,54 +136,49 @@ header {
 	border: 1px solid var(--color-light-gray);
 }
 
+// LIST
 #project-list {
+  // border : 1px solid red;
 	display: flex;
 	flex-direction: column;
 	padding-left: var(--space);
 	padding-right: var(--space);
-	padding-top: 100px;
-
+	padding-top: 86px;
 	position: absolute;
 	top: 0;
 	left: 50px;
 	width: var(--sidebar-width);
-	// mix-blend-mode: overlay;
-	background-color: rgba(255, 255, 255, 0.3);
+	background-color: rgba(255, 255, 255, 0.8);
 	-webkit-backdrop-filter: blur(3px);
 	backdrop-filter: blur(3px);
-	z-index: 239;
+	z-index: 250;
 	height: 100%;
-	// box-shadow: 15px 0px 20px -25px rgba(0, 0, 0, 0.05);
-	&:after {
-		content: " ";
-		background-color: rgba(255, 255, 255, 0.8);
-		width: 100%;
-		z-index: -1;
-		height: 100%;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		position: absolute;
-	}
-	div {
-		height: calc(var(--sprint-height) * 2);
+	article {
+    // border:1px solid blue;
 		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
-		align-items: stretch;
-		h4 {
+		flex-direction: row;
+		justify-content: flex-start;
+    align-items: center;
+    color: var(--color-gray);
+    min-height: calc(var(--sprint-height) * 2);
+    svg {
+      // border :1px solid yellow;
+      width: var(--icon-base);
+      height: var(--icon-base);
+      margin-right: calc(var(--space) / 2);
+    }
+		div {
+      // border :1px solid green;
 			user-select: none;
-			// pointer-events: none;
 			overflow: hidden;
-			text-overflow: ellipsis;
-			font-size: 1rem;
-			font-weight: 700;
+      text-overflow: ellipsis;
+      font-weight: 700;
 			padding-bottom: 7px;
-			// word-wrap: normal;
-			// height: 1.5rem;
 			line-height: 1;
 			letter-spacing: var(--letter-spacing);
+            h4 {
+              font-size: 1rem;
+            }
 		}
 	}
 }
@@ -195,7 +193,7 @@ header {
 	position: relative;
 	min-height: var(--sprint-height) ;
 	margin-bottom: calc(var(--sprint-height) );
-	
+
 	figure {
 		width: 100%;
 		min-height: 100%;
@@ -268,7 +266,7 @@ header {
 				font-weight: 600;
 				letter-spacing: var(--letter-spacing);
 			}
-			
+
 			// position: absolute;
 			margin-top: calc( var(--days-distance) * -1 ) ;
 			background-color: rgba(0, 0, 0, 0.1);
@@ -307,7 +305,7 @@ header {
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
-	&.project-type-rc { 
+	&.project-type-rc {
 		strong {
 			margin-left: 10px;
 			text-overflow: ellipsis;
@@ -333,7 +331,7 @@ header {
 
 		width: calc(var(--space) / 2);
 		// border:1px solid red;
-		border-radius: 0 var(--border-radius) var(--border-radius) 0; 
+		border-radius: 0 var(--border-radius) var(--border-radius) 0;
 
 		background: transparent;
 		&:hover {
@@ -347,15 +345,21 @@ header {
 		font-size: 0.8rem;
 		align-items: center;
 		position: absolute;
-		top: -15px;
 		color: var(--text-color);
 		width: 100%;
 		line-height: 1;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		letter-spacing: var(--letter-spacing);
-		i { margin-right: 5px; }
-		
+    svg {
+      display: block;
+      flex-shrink: 0;
+      margin: 0 5px;
+      width: var(--icon-sm);
+      height: var(--icon-sm);
+
+     }
+
 		span {
 			background-color: var(--color-light-gray);
 			padding: 0px 5px;
@@ -365,9 +369,9 @@ header {
 			border-radius: 3px;
 			margin-left: auto;
 		}
-		
+
 	}
-	
+
 	progress {
 		-webkit-appearance: none;
 		appearance: none;
@@ -398,7 +402,7 @@ header {
 		mix-blend-mode: multiply;
 		border-bottom-left-radius: var(--border-radius);
 	}
-	
+
 }
 .project-sprint-details {
 	padding: var(--space);

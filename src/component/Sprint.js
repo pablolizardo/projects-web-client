@@ -16,14 +16,14 @@ const Sprint = ({ sprint, color, type , clientOnly }) => {
     const [isDragging, setIsDragging] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
-    const handleOnClick = e => {
-        e.preventDefault()
+    const handleOnWheel = e => {
         if(e.type==='wheel') {
            setIsOpen(e.deltaY > 0)
-        } else {
-            if( !isDragging ){
-                setIsOpen(!isOpen)
-            }
+        } 
+    }
+    const handleOnDoubleClick = e => {
+        if( !isDragging ){
+            setIsOpen(!isOpen)
         }
     }
     const startDragging = e => { e.target.nodeName === 'DIV' && setIsDragging(true) }
@@ -39,8 +39,8 @@ const Sprint = ({ sprint, color, type , clientOnly }) => {
             onMouseMove={handleDragging}
             onMouseUpCapture={stopDragging}
             onMouseLeave={stopDragging}
-            onDoubleClick={handleOnClick} 
-            onWheel={handleOnClick} 
+            onDoubleClick={handleOnDoubleClick} 
+            onWheel={handleOnWheel} 
             style={{
                 gridColumn: `${gridStart}  / span ${gridSpan}`,
                 backgroundColor: `var(--color-${color})`,
