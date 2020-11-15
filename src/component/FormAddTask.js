@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { mutate } from 'swr'
-// import { sprintTypes } from '../consts'
+import { taskTypes } from '../consts'
 import { AppContext } from '../context/AppContext'
 import fetcher from '../utils/fetcher'
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IconCode, IconTest } from '../consts/icons'
+import { IconBell, IconCode, IconExclamation, IconRefresh, IconShield } from './../icons'
 
 const SprintHeader = ({sprint}) => {
 
@@ -9,11 +9,13 @@ const SprintHeader = ({sprint}) => {
 
     return (
         <div className='project-sprint-header'>
-            { sprint.type ==='dev' && <IconCode />}
-            { sprint.type ==='test' && <IconTest />}
-            <strong>{sprint.title}</strong>
-            <span onClick={handleSprintOptions}>···</span>
-            { showMenu && <div className='project-sprint-menu' onClick={handleDelete}> </div> }
+            { sprint.type ==='sprints' && <IconCode />}
+            { sprint.type ==='rc' && <IconRefresh />}
+            { sprint.type ==='support' && <IconShield />}
+            { sprint.type ==='fixs' && <IconExclamation />}
+            <h4>{sprint.title}</h4>
+            {/* <span onClick={handleSprintOptions}>···</span>
+            { showMenu && <div className='project-sprint-menu' onClick={handleDelete}> </div> } */}
         </div>
     )
 }

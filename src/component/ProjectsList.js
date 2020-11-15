@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import IconCode from '../consts/icons'
 import { AppContext } from '../context/AppContext'
+import { IconFolder } from '../icons'
 
 export default function ProjectsList() {
   const context = useContext(AppContext)
@@ -9,7 +9,7 @@ export default function ProjectsList() {
 
       {context.projects.map((project) =>
         <article key={project.title} >
-          <IconCode />
+          <IconFolder />
           <div>
             <p>{project.type}</p>
               <h4 style={{
