@@ -25,7 +25,8 @@ const AppContextWrapper = ({ children }) => {
         showForms,
         setShowForms,
         currentMonth,
-        setCurrentMonth
+        setCurrentMonth,
+        showGuides: false
     }
 
     if (error) return <div>failed to load</div>

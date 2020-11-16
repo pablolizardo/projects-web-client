@@ -44,7 +44,7 @@ const Sprint = ({ sprint, color, type, clientOnly }) => {
             style={{
                 gridColumn: `${gridStart}  / span ${gridSpan}`,
                 backgroundColor: `var(--color-${color})`,
-                borderRadius: (type === 'rc' && !isOpen )? '20px' : 'var(--border-radius)',
+                borderRadius: (type === 'rc' && !isOpen )? '20px' : 'var(--border-radius) ',
                 height: isOpen ? 'fit-content' : 'min-content'
             }}>
             <SprintHeader sprint={sprint} />

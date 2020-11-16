@@ -11,9 +11,9 @@ export default function ProjectsList() {
         <article key={project.title} >
           <IconFolder />
           <div>
-            <p>{project.type}</p>
+            {/* <p>{project.type}</p> */}
               <h4 style={{
-              color: project.clientOnly ? 'var(--color-gray)' : `var(--color-${project.color})`,
+              // color: project.clientOnly ? 'var(--color-gray)' : `var(--color-${project.color})`,
               opacity: project.clientOnly ? '.5' : 1
             }} > {project.title} </h4>
           </div>

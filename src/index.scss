@@ -171,7 +171,7 @@ header {
 
 // LIST
 #project-list {
-  // border : 1px solid red;
+  border-right : 1px solid var(--color-gray-light);
 	display: flex;
 	flex-direction: column;
 	padding-left: var(--space);
@@ -179,7 +179,7 @@ header {
 	padding-top: 86px;
 	position: absolute;
 	top: 0;
-	left: 50px;
+	// left: 50px;
 	width: var(--sidebar-width);
 	background-color: rgba(255, 255, 255, 0.8);
 	-webkit-backdrop-filter: blur(3px);
@@ -197,13 +197,16 @@ header {
 		svg {
 			width: var(--icon-base);
 			height: var(--icon-base);
+			opacity: .2;
 			margin-right: calc(var(--space) / 2);
 		}
 		div {
 			user-select: none;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			font-weight: 700;
+			// font-weight: 700;
+			font-size: var(--text-sm);
+			color: var(--color-black);
 			padding-bottom: 7px;
 			line-height: 1;
 			letter-spacing: var(--letter-spacing);
@@ -215,19 +218,19 @@ header {
 }
 #project-view {
 	position: relative;
-	min-height: 100%;
+	// min-height: 100%;
 }
 
 #project-wrap {
 	display: flex;
 	align-items: flex-start;
 	position: relative;
-	min-height: var(--sprint-height) ;
+	// min-height: var(--sprint-height) ;
 	margin-bottom: calc(var(--sprint-height) );
 
 	figure {
 		width: 100%;
-		min-height: 100%;
+		// min-height: 100%;
 		position: absolute;
 		top: 0;
 		left: calc(var(--space) * -1);
@@ -240,7 +243,7 @@ header {
 	overflow-y: hidden;
 	scroll-behavior: smooth;
 	scroll-snap-align: start;
-	min-height: 100%;
+	// min-height: 100%;
 	user-select: none;
 	padding-top: 100px;
 	// pointer-events: none;
@@ -251,7 +254,7 @@ header {
 	height: calc(100% + var(--today-distance));
 	border-radius: var(--border-radius);
 	width: 2px;
-	background-color: var(--color-black);
+	background-color: tomato;
 	position: absolute;
 	opacity: 0.9;
 	top: -var(--today-distance);
@@ -262,12 +265,23 @@ header {
 	z-index: 39;
 	&:after {
 		content: ' TODAY ';
-		color: var(--color-black);
+		color: tomato;
 		font-weight: 800;
 		letter-spacing: var(--letter-spacing);
 		text-transform: lowercase;
 		font-size: var(--text-sm);
-				padding-left: 7px ;
+		padding-left: 7px ;
+	}
+	&:before {
+		content: '  ';
+		background-color: tomato;
+		width: 8px;
+		height: 8px;
+		left: -3px;
+		position: absolute;
+		border-radius: 4px;
+
+
 	}
 }
 #project-grid-year {
@@ -327,13 +341,13 @@ header {
 }
 
 .project-sprint {
-	
+	background-color: white;
 	font-size: var(--text-sm);
 	min-height: var(--sprint-height);
-	border-radius: var(--border-radius);
+	border-radius: var(--border-radius)  0 ;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	padding:5px;
+	padding:6px;
 	position: relative;
 	// overflow: hidden;
 	letter-spacing: var(--letter-spacing);
@@ -341,8 +355,21 @@ header {
 	color: var(--text-color);
 	display: flex;
 	flex-direction: column;
-	&:hover { cursor: grab; }
-	&:active , &:focus{ cursor: grabbing; }
+	background-color: white!important;
+	border:1px solid var(--color-gray-light);
+	box-shadow: 0px 2px 2px rgba(0,0,0,.2);
+	font-weight: 400;
+
+	&:hover { 
+		cursor: grab; 
+		box-shadow: 0px 1px 3px rgba(0,0,0,.2);
+
+	}
+	&:active , &:focus{ 
+		cursor: grabbing; 
+		box-shadow: 0px 1px 1px rgba(0,0,0,.2);
+
+	}
 	.project-sprint-header {
 		display: flex;
 		svg {
@@ -353,40 +380,39 @@ header {
 			height: var(--icon-sm);
 		}
 
-		span {
-			background-color: rgba(0,0,0,.05);
-			display: flex;
-			cursor: pointer;
-			align-items: center;
-			border-radius: 3px;
-			margin-left: auto;
+		h5 {
+			font-weight: 500;
+			font-size: var(--text-sm);
+
 		}
 	}
 	.sprint-timeline {
-		position: absolute;
-		top:-15px;
-		display: flex;
-		left:0;
-		right:0;
-		width: 100%;
-		height: 100%;
-		span:after{
-			flex-shrink: 0;
-			content : ' ';
-			padding: 0;
-			margin: 0;
-			background-color: var(--color-black);
-			width: 2px;
+		
+		span {
 			position: absolute;
-			top:15px;
-			height: calc(100% );
+			border:1px solid black;
+			height: 100% ;
+			width: 2px;
+			left: 0;
+			top:0px;
 		}
-		svg{
-			display: block;
-			flex-shrink: 0;
-			width: var(--icon-sm);
-			height: var(--icon-sm);
+		span:before{
+			content: '  ';
+			background-color: black;
+			width: 8px;
+			height: 8px;
+			left: -4px;
+			top:-5px;
+			position: absolute;
+			border-radius: 4px;
+			
 		}
+		// svg{
+		// 	display: block;
+		// 	flex-shrink: 0;
+		// 	width: var(--icon-sm);
+		// 	height: var(--icon-sm);
+		// }
 
 	}
 	.project-sprint-details {
@@ -408,16 +434,16 @@ header {
 		right: 0;
 		margin: 0;
 		padding: 0;
-		height: 6px;
+		height: 4px;
 		cursor: ew-resize;
-		border-bottom-right-radius: var(--border-radius);
+		// border-bottom-right-radius: var(--border-radius);
 
 		&:hover{
 			background-color: rgba(0,0,0,.1);
 		}
 	}
 	progress::-webkit-progress-bar { background-color: rgba(0,0,0,0); }
-	progress::-webkit-progress-value { background-color: rgba(0,0,0,.2); }
+	progress::-webkit-progress-value { background-color: rgba(0,0,0,.3); }
 	
 
 }

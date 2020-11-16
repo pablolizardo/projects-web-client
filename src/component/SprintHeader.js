@@ -13,7 +13,7 @@ const SprintHeader = ({sprint}) => {
             { sprint.type ==='rc' && <IconRefresh />}
             { sprint.type ==='support' && <IconShield />}
             { sprint.type ==='fixs' && <IconExclamation />}
-            <h4>{sprint.title}</h4>
+            <h5>{sprint.title}</h5>
             {/* <span onClick={handleSprintOptions}>···</span>
             { showMenu && <div className='project-sprint-menu' onClick={handleDelete}> </div> } */}
         </div>
