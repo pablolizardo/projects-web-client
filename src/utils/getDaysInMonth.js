@@ -1,4 +1,4 @@
-import getDaysInYear from "./getDaysInYear"
+// import getDaysInYear from "./getDaysInYear"
 
 const getDaysInMonth = month => {
     let day = new Date(2020, month, 0)

@@ -11,9 +11,7 @@ import ProjectsList from "./component/ProjectsList";
 
 function App() {
   const context = useContext(AppContext);
-  const handlePan = (e) => {
-    console.log(e);
-  };
+
   return (
     <main id="app-container">
       <Header />
@@ -26,7 +24,7 @@ function App() {
       )}
       <div style={{ position: "relative", }} >
         <ProjectsList />
-        <div id='project-scroll' ref={context.scrollRef} onAuxClick={handlePan}>
+        <div id='project-scroll' ref={context.scrollRef} >
           <div id='project-view' style={{ width: `${context.yearWidth}px` }}>
             <GridYear />
             <GridToday />

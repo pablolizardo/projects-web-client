@@ -16,6 +16,7 @@ const SprintHeader = ({sprint}) => {
             <h5>{sprint.title}</h5>
             {/* <span onClick={handleSprintOptions}>···</span>
             { showMenu && <div className='project-sprint-menu' onClick={handleDelete}> </div> } */}
+            <img  src={`https://robohash.org/${Math.floor(Math.random()*10)}`}/>
         </div>
     )
 }

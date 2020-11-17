@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import getDaysInYear from '../utils/getDaysInYear'
+import getDiffBetweenDates from '../utils/getDiffBetweenDates'
 import getPositionInGrid from '../utils/getPositionInGrid'
 import SprintHeader from './SprintHeader'
 import SprintProgress from './SprintProgress'
@@ -32,6 +33,7 @@ const Sprint = ({ sprint, color, type, clientOnly }) => {
 
     const gridStart = getPositionInGrid(start.toISOString().split('T')[0]) + Math.floor(distanceMoved / dayWidth)
     const gridSpan = diff
+    const sprintDuration = getDiffBetweenDates(sprint.start, sprint.end)
 
     return (
         <div className={`project-sprint project-type-${type}`}
@@ -49,14 +51,23 @@ const Sprint = ({ sprint, color, type, clientOnly }) => {
             }}>
             <SprintHeader sprint={sprint} />
             <SprintTimeline sprint={sprint} />
-            { isOpen && <div className='project-sprint-details'>
-                        <ul>
-                            {sprint.tasks.map(task =>
-                                <li>{task.type}  {task.title} </li>
-                            )}
-                            {sprint.tasks.length === 0 && <li>No tasks assigned to sprint</li>}
-                        </ul>
-                    </div>}
+            { isOpen && <section className='project-sprint-details'>
+                        <div
+                        className='sprint-tasks'
+                          style={{
+                            display: 'grid',
+                            gridTemplateColumns: `repeat(${sprintDuration} , 1fr)`
+                            }} >
+                            {sprint.tasks.map(task => {
+                              const taskStart = getDiffBetweenDates(sprint.start, task.date)
+                              return <span style={{
+                                gridColumn: `${taskStart + 1} / ${gridSpan + 1}`
+                                }} > {task.title} </span>
+                            }
+                           )}
+                        </div>
+                        {sprint.tasks.length === 0 && <p>No tasks assigned to sprint</p>}
+                    </section>}
             <SprintProgress progress={sprint.progress} color={color} />
             {/* <span className='sprint-tail'></span> */}
         </div>

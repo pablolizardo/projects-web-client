@@ -21,12 +21,13 @@ const SprintProgress = ({progress,color}) => {
     const stopDragging = e => {
         setIsDragging(false)
     }
-   
 
 
-    return <progress className={`progress progress-color-${color}`}
-    // style={{pointerEvents: 'none'}}
-        max={100} 
+
+    return <progress
+      className={`progress`}
+        max={100}
+        min={0}
         value={newProgress}
         onMouseDownCapture={startDragging}
         onMouseMove={handleDragging}
