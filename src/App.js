@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import Header from "./component/Header";
 import { AppContext } from "./context/AppContext";
-import FormAddSprint from "./component/FormAddSprint";
-import FormAddProject from "./component/FormAddProject";
 import GridYear from "./component/GridYear";
 import GridToday from "./component/GridToday";
 import Project from "./component/Project";
-import FormAddTask from "./component/FormAddTask";
 import ProjectsList from "./component/ProjectsList";
+import FormModal from "./component/FormModal";
 
 function App() {
   const context = useContext(AppContext);
@@ -15,13 +13,7 @@ function App() {
   return (
     <main id="app-container">
       <Header />
-      {context.showForms && (
-        <div id='modal'>
-          <FormAddProject />
-          <FormAddSprint />
-          <FormAddTask />
-        </div>
-      )}
+      <FormModal />
       <div style={{ position: "relative", }} >
         <ProjectsList />
         <div id='project-scroll' ref={context.scrollRef} >
