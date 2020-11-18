@@ -15,8 +15,12 @@ const SprintHeader = ({ sprint }) => {
       { sprint.type === 'fixs' && <IconExclamation />}
       <h5
         style={{
-          background: `-webkit-linear-gradient(50%, black, gray)`,
-
+          // background: `-webkit-linear-gradient(50%, black, gray)`,
+          backgroundImage: `linear-gradient(
+            90deg,
+            var(--text-color) 50%,
+            silver 60%
+          )`
         }}
       >{sprint.title}</h5>
       {/* <span onClick={handleSprintOptions}>···</span>
