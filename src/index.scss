@@ -135,11 +135,20 @@ header {
     }
   }
 }
-
+#modal-backdrop{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 400;
+  overflow: hidden;
+  animation-fill-mode: forwards;
+}
 #modal {
   min-width: 700px;
   width: calc(100% - calc(var(--space) * 5));
-
   height: fit-content;
   margin: auto;
   position: absolute;
@@ -147,13 +156,25 @@ header {
   right: 0;
   left: 0;
   bottom: 0;
-
   background-color: white;
   z-index: 349;
   padding: var(--space);
   border-radius: var(--border-radius);
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  animation-fill-mode: forwards;
 }
+.pop-in { animation: pop-in .5s cubic-bezier(.03,1.62,.41,1.05); }
+
+@keyframes pop-in { from { transform : scale(.9) rotateX(40deg); } to { transform : scale(1); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.pop-out { animation: pop-in .2s; }
+.fade-in { animation: fade-in .3s; }
+.fade-out { animation: fade-out .2s; }
+
+@keyframes pop-out { from { transform : scale(1); }  to { transform : scale(.9) rotateX(40deg); } }
+@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+
 #app-container {
   // border:'2px solid red',
   width: 100vw;
@@ -449,6 +470,8 @@ header {
       span {
         overflow: hidden;
         padding-left: 6px;
+        padding-bottom:6px;
+        
       }
     }
   }

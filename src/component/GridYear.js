@@ -12,8 +12,6 @@ const Grid = () => {
       context.dayNumbers.forEach((day,index) => {
         if ( day === 1) {
           names.push({ day: index, name: monthsNames[j]})
-          // console.log({ [index]: monthsNames[j]})
-          console.log({day, index, j, month : monthsNames[j]})
           j++;
         }
       })

@@ -7,7 +7,7 @@ export default function SprintTimeline({ sprint }) {
     <div className='sprint-timeline' style={{ gridTemplateColumns: `repeat(${sprintDuration} , 1fr)` }} >
       {sprint.tasks.map(task => {
         const taskStart = getDiffBetweenDates(sprint.start, task.date)
-        return <span style={{ gridColumn: taskStart + 1 }} />
+        return <span key={task._id} style={{ gridColumn: taskStart + 1 }} />
       })}
     </div>
   )

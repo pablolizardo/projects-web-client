@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import getDaysInYear from '../utils/getDaysInYear'
 import getDiffBetweenDates from '../utils/getDiffBetweenDates'
@@ -7,7 +7,8 @@ import SprintHeader from './SprintHeader'
 import SprintProgress from './SprintProgress'
 import SprintTimeline from './SprintTimeline'
 
-const Sprint = ({ sprint, color, type, clientOnly }) => {
+const Sprint = ({ sprint, color, type }) => {
+    const sprintRef = useRef()
     const { yearWidth } = useContext(AppContext)
     const start = new Date(sprint.start)
     const end = new Date(sprint.end)
@@ -16,6 +17,11 @@ const Sprint = ({ sprint, color, type, clientOnly }) => {
     const [distanceMoved, setDistanceMoved] = useState(0)
     const [isDragging, setIsDragging] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
+    const [sprintWidth, setSprintWidth] = useState(10)
+
+    useEffect(() => {
+        if(sprintRef.current) setSprintWidth(sprintRef.current?.clientWidth)
+    }, [sprintRef])
 
     const handleOnWheel = e => {
         if (e.type === 'wheel') {
@@ -34,9 +40,9 @@ const Sprint = ({ sprint, color, type, clientOnly }) => {
     const gridStart = getPositionInGrid(start.toISOString().split('T')[0]) + Math.floor(distanceMoved / dayWidth)
     const gridSpan = diff
     const sprintDuration = getDiffBetweenDates(sprint.start, sprint.end)
-
+    
     return (
-        <div className={`project-sprint project-type-${type}`}
+        <div ref={sprintRef} className={`project-sprint project-type-${type}`} 
             onMouseDownCapture={startDragging}
             onMouseMove={handleDragging}
             onMouseUpCapture={stopDragging}
@@ -49,7 +55,7 @@ const Sprint = ({ sprint, color, type, clientOnly }) => {
                 borderRadius: (type === 'rc' && !isOpen )? '20px' : 'var(--border-radius) ',
                 height: isOpen ? 'fit-content' : 'min-content'
             }}>
-            <SprintHeader sprint={sprint} />
+            <SprintHeader sprint={sprint} sprintWidth={sprintWidth}/>
             <SprintTimeline sprint={sprint} />
             { isOpen && <section className='project-sprint-details'>
                         <div
@@ -60,10 +66,12 @@ const Sprint = ({ sprint, color, type, clientOnly }) => {
                             }} >
                             {sprint.tasks.map(task => {
                               const taskStart = getDiffBetweenDates(sprint.start, task.date)
-                              return <span style={{
-                                gridColumn: `${taskStart + 1} / ${gridSpan + 1}`
-                                }} > {task.title} </span>
-                            }
+                              return <span 
+                                key={task._id}
+                                style={{
+                                    gridColumn: `${taskStart + 1} / ${gridSpan + 1}`
+                                    }} > {task.title} </span>
+                                }
                            )}
                         </div>
                         {sprint.tasks.length === 0 && <p>No tasks assigned to sprint</p>}
@@ -71,7 +79,7 @@ const Sprint = ({ sprint, color, type, clientOnly }) => {
             <SprintProgress progress={sprint.progress} color={color} />
             {/* <span className='sprint-tail'></span> */}
         </div>
-    )
+        )
 }
 
 
