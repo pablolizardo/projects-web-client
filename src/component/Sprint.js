@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import { mutate } from 'swr'
 import { AppContext } from '../context/AppContext'
 import getDaysInYear from '../utils/getDaysInYear'
 import getDiffBetweenDates from '../utils/getDiffBetweenDates'
@@ -35,12 +36,39 @@ const Sprint = ({ sprint, color, type }) => {
     }
     const startDragging = e => { e.target.nodeName === 'DIV' && setIsDragging(true) }
     const handleDragging = e => { isDragging && setDistanceMoved(distanceMoved => distanceMoved += e.movementX) }
-    const stopDragging = () => { setIsDragging(false) }
+    const stopDragging = () => { 
+        if( isDragging ) {
+            let daysMoved = Math.floor(distanceMoved/dayWidth)
+            let newStartDate=new Date(start.getFullYear(),start.getMonth(),start.getDate()+daysMoved)
+            let newEndDate=new Date(end.getFullYear(),end.getMonth(),end.getDate()+daysMoved)
+            moveSprint(newStartDate,newEndDate)
+            setIsDragging(false) 
+        }
+    }
+    const moveSprint = async (newStartDate,newEndDate) => {
+        await fetch(`${process.env.REACT_APP_API_URL}/sprints/${sprint._id}`,
+            { method: 'PUT',
+                headers: { 
+                    'Content-Type' : 'application/json',
+                    'Accept':'application/json'
+                },
+                body : JSON.stringify({
+                    start: newStartDate,
+                    end: newEndDate
+                 })
+            })
+            // mutate(`${process.env.REACT_APP_API_URL}/projects`)
+    }
 
     const gridStart = getPositionInGrid(start.toISOString().split('T')[0]) + Math.floor(distanceMoved / dayWidth)
     const gridSpan = diff
     const sprintDuration = getDiffBetweenDates(sprint.start, sprint.end)
-    
+    const handleContextMenu = e => {
+         if (e.type === 'contextmenu') {
+            e.preventDefault()
+            console.log('Right click');
+        }
+    }
     return (
         <div ref={sprintRef} className={`project-sprint project-type-${type}`} 
             onMouseDownCapture={startDragging}
@@ -49,6 +77,7 @@ const Sprint = ({ sprint, color, type }) => {
             onMouseLeave={stopDragging}
             onDoubleClick={handleOnDoubleClick}
             onWheel={handleOnWheel}
+            onContextMenu={handleContextMenu}
             style={{
                 gridColumn: `${gridStart}  / span ${gridSpan}`,
                 backgroundColor: `var(--color-${color})`,
@@ -56,7 +85,7 @@ const Sprint = ({ sprint, color, type }) => {
                 height: isOpen ? 'fit-content' : 'min-content'
             }}>
             <SprintHeader sprint={sprint} sprintWidth={sprintWidth}/>
-            <SprintTimeline sprint={sprint} />
+            <SprintTimeline sprint={sprint} isOpen={isOpen}/>
             { isOpen && <section className='project-sprint-details'>
                         <div
                         className='sprint-tasks'

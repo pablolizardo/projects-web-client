@@ -22,7 +22,7 @@
 
 /* Handle */
 *::-webkit-scrollbar-thumb {
-  background: var(--color-light-gray);
+  background: var(--color-gray-light);
 }
 
 /* Handle on hover */
@@ -100,11 +100,10 @@ body {
   --color-orange: #e5aa73;
   --color-orange-dark: #ce7134;
 
-  --color-gray-light: #cbd5e0;
-  --color-gray: #cbd5e0;
-  --color-gray-dark: #cbd5e0;
+  --color-gray-light:  hsl(0, 0%, 90%);
+  --color-gray:  hsl(0, 0%, 60%);
+  --color-gray-dark:  hsl(0, 0%, 30%);
 
-  --color-light-gray: hsl(0, 0%, 90%);
   --color-white: hsl(0, 0%, 99%);
   --color-black: hsl(0, 0%, 20%);
 
@@ -189,7 +188,7 @@ header {
   margin: var(--space);
   height: fit-content;
   border-radius: var(--border-radius);
-  border: 1px solid var(--color-light-gray);
+  border: 1px solid var(--color-gray-light);
 }
 
 // LIST
@@ -210,33 +209,20 @@ header {
   z-index: 250;
   height: 100%;
   article {
-    // border:1px solid blue;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
     color: var(--text-color);
     min-height: calc(var(--sprint-height) * 2);
-    svg {
-      width: var(--icon-base);
-      height: var(--icon-base);
-      opacity: 0.2;
-      margin-right: calc(var(--space) / 2);
-    }
-    div {
       user-select: none;
       overflow: hidden;
       text-overflow: ellipsis;
       // font-weight: 700;
       font-size: var(--text-sm);
-      color: var(--color-black);
+      color: var(--color-gray-dark);
       padding-bottom: 7px;
       line-height: 1;
       letter-spacing: var(--letter-spacing);
       h4 {
         font-size: var(--text-base);
       }
-    }
   }
 }
 #project-view {
@@ -253,7 +239,7 @@ header {
 
   figure {
     width: 100%;
-    // min-height: 100%;
+    min-height: 100%;
     position: absolute;
     top: 0;
     left: calc(var(--space) * -1);
@@ -269,6 +255,7 @@ header {
   // min-height: 100%;
   user-select: none;
   padding-top: 100px;
+  padding-bottom: var(--sprint-height);
   // pointer-events: none;
 }
 
@@ -325,7 +312,7 @@ header {
         content: attr(data-month);
         position: absolute;
         top: calc(var(--days-distance) * -1);
-        color: var(--color-light-gray);
+        color: var(--color-gray-light);
         font-size: var(--text-lg);
 
         margin-top: -4px;
@@ -371,7 +358,7 @@ header {
   position: relative;
   // overflow: hidden;
   letter-spacing: var(--letter-spacing);
-  transition: opacity 0.2s, border-radius 0.1s;
+  transition: opacity 0.2s, border-radius 0.1s, box-shadow .2s, border-color .2s;
   color: var(--text-color);
   display: flex;
   flex-direction: column;
@@ -386,19 +373,18 @@ header {
   }
   &:hover {
     cursor: grab;
-    background: var(--color-gray-light);
-
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    border-color: var(--color-white);
   }
   &:active,
   &:focus {
     cursor: grabbing;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+    border-color: var(--color-gray-light);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
   }
   .project-sprint-header {
     display: flex;
     padding: 6px;
-
     align-items: center;
     img {
       // background-color: white;
@@ -414,10 +400,17 @@ header {
     }
 
     h5 {
+    cursor: text;
+
       font-weight: 500;
       font-size: var(--text-sm);
       line-height: var(--text-sm);
       background-color: var(--text-color);
+      padding-right: 5px;
+      &:hover { 
+      opacity: .9;
+
+      }
       // background-image: linear-gradient(
       //   90deg,
       //   var(--text-color) 50%,
@@ -441,15 +434,17 @@ header {
     left: 0;
     span {
       position: absolute;
-      border: 1px solid black;
+      border: 1px solid var(--color-gray-dark);
       height: 100%;
       width: 2px;
       left: 0;
       top: 0px;
+      transition: opacity .2s,
+                  borderStyle .2s;
     }
     span:before {
       content: "  ";
-      background-color: black;
+      background-color: var(--color-black);
       width: 8px;
       height: 8px;
       left: -4px;
@@ -513,14 +508,14 @@ select,
 textarea {
   padding: calc(var(--space) / 2) var(--space);
   border-radius: var(--border-radius);
-  border: 1px solid var(--color-light-gray);
+  border: 1px solid var(--color-gray-light);
 }
 
 button {
   padding: calc(var(--space) / 2) var(--space);
   border-radius: var(--border-radius);
   background-color: var(--color-white);
-  border: 1px solid var(--color-light-gray);
+  border: 1px solid var(--color-gray-light);
   &.primary {
     background-color: var(--color-black);
     color: var(--color-white);

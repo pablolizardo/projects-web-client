@@ -9,14 +9,8 @@ export default function ProjectsList() {
 
       {context.projects.map((project) =>
         <article key={project.title} >
-          <IconFolder />
-          <div>
-            {/* <p>{project.type}</p> */}
-              <h4 style={{
-              // color: project.clientOnly ? 'var(--color-gray)' : `var(--color-${project.color})`,
-              opacity: project.clientOnly ? '.5' : 1
-            }} > {project.title} </h4>
-          </div>
+          <p>{project.type}</p>
+          <h4 style={{ opacity: project.clientOnly ? '.5' : 1 }} > {project.title} </h4>
         </article>
       )}
     </aside>
